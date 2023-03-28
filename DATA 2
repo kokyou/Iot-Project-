@@ -1,0 +1,19 @@
+readChId = 1798549;
+writeChId = 2057381;
+writeKey = 'SIIJAXJ8OJF2QN2G';
+
+% Collect data from public channel
+[Voltage,time] = thingSpeakRead(readChId,'Fields',1,'NumPoints',20);
+Solar_Amps = thingSpeakRead(readChId,'Fields',2,'NumPoints',20);
+Wind_Amps = thingSpeakRead(readChId,'Fields',3,'NumPoints',20);
+
+% Analysis
+Solar_Watt = (Voltage).*(Solar_Amps);
+
+Wind_Watt = (Voltage).*(Wind_Amps);
+
+%Write to our public channel
+thingSpeakWrite(writeChId,[Voltage,Solar_Amps,Wind_Amps,Solar_Watt,Wind_Watt],...
+    'Fields',[3,4,5,6,7],...
+    'TimeStamps',time,'Writekey',writeKey);
+disp("done");
