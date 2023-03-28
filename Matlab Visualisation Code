@@ -1,0 +1,18 @@
+% Enter your MATLAB code below
+readChId = 2057381; %Write your own channel ID
+readKey = 'ZGO4TBN47HD6G0LP'; %Write your own read key (not write key!)
+
+
+%collect the number of points from the channel
+[windPower,timeStamps] = thingSpeakRead(readChId,'fields',[1,2],...
+     DateRange=[datetime(2023,3,10,00,00,01),datetime(2023,3,15,23,00,00)]);
+
+
+%Plot the graph
+plot(timeStamps,windPower);
+xlabel('TimeStamps');
+ylabel('Measured Values');
+title('Wind Power Measurement');
+legend({'Wind Speed','Wind Power'});
+grid on;
+disp("done");
